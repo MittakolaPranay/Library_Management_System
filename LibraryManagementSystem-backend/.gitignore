@@ -28,3 +28,5 @@ bin/
 ### Mac OS ###
 .DS_Store
 
+### hide the config.properties ###
+config.properties
