@@ -1,0 +1,25 @@
+.booklist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2% 20%;
+    list-style: none;
+}
+
+@media (max-width : 950px) {
+    .booklist {
+        padding: 2% 10%;
+    }
+}
+
+@media (max-width : 720px) {
+    .booklist {
+        padding: 2% 5%;
+    }
+}
+
+@media (max-width : 400px) {
+    .booklist {
+        padding: 2% 1%;
+    }
+}

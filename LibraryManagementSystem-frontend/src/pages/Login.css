@@ -1,0 +1,70 @@
+.form-section {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: end;
+}
+
+.form-section .form {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 2%;
+    width: 25%;
+    text-align: center;
+}
+
+.form-section .form .box{
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    gap: 1%;
+}
+
+.form-section .form .extras {
+    display: flex;
+    gap: 1%;
+
+}
+
+
+.password {
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.password #password,#confirm-password{
+    width: 85%;
+    border: none;
+}
+
+.password span {
+    width: 15%;
+}
+
+
+#password,#confirm-password:focus {
+    border: none;
+    outline: none;
+}
+
+@media (max-width : 1000px) {
+    .form-section form{
+        width: 40%;
+    }
+}
+
+@media (max-width : 700px) {
+    .form-section form{
+        width: 50%;
+    }
+}
+
+
+@media (max-width : 400px) {
+    .box form{
+        width: 80%;
+    }
+}
+
