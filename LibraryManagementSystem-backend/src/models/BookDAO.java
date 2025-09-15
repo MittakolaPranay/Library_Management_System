@@ -13,7 +13,7 @@ public class BookDAO {
 
     public boolean addBook(Book book) {
 
-        String addBookQuery = "insert into books (title,author,isbn,copies,available,image_url) value (?,?,?,?,?,?)";
+        String addBookQuery = "insert into books (title,author,isbn,copies,available,image_url) values (?,?,?,?,?,?)";
         try (
                 Connection connection = DBConnection.getConnector();
                 PreparedStatement preparedStatement = connection.prepareStatement(addBookQuery);
@@ -70,18 +70,21 @@ public class BookDAO {
 
     public List<Book> searchBooks(String q) {
 
+        System.out.println("---------- q is" + q);
         String searchBooksQuery = "select * from books where title like ? or author like ? or isbn like ?";
         List<Book> books = new ArrayList<>();
         String searchPattern = "%" + q + "%";
+        System.out.println("----- final pattern :"+searchPattern);
         try (
                 Connection connection = DBConnection.getConnector();
                 PreparedStatement preparedStatement = connection.prepareStatement(searchBooksQuery);
                 ) {
             preparedStatement.setString(1,searchPattern);
-            preparedStatement.setString(2,searchBooksQuery);
-            preparedStatement.setString(3,searchBooksQuery);
+            preparedStatement.setString(2,searchPattern);
+            preparedStatement.setString(3,searchPattern);
 
             ResultSet rs = preparedStatement.executeQuery();
+
 
             while(rs.next()) {
                 books.add(new Book(
@@ -93,6 +96,14 @@ public class BookDAO {
                         rs.getInt("available"),
                         rs.getString("image_url")
                 ));
+            }
+
+            if(!books.isEmpty()) {
+                for(Book book: books) {
+                    System.out.println("----------"+book.getTitle());
+                }
+            } else {
+                System.out.println("--------------------book is empty-----------------------");
             }
 
             rs.close();

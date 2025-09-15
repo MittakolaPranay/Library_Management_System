@@ -102,3 +102,15 @@
     width: 10rem;
   }
 }
+
+@media (max-width : 380px) {
+  .card{
+    width: 9rem;
+  }
+}
+
+@media (max-width : 350px) {
+  .card{
+    width: 8rem;
+  }
+}

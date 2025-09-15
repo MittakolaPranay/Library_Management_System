@@ -1,6 +1,7 @@
 package servlets;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
+@MultipartConfig
 public class UpdateBookServlet extends HttpServlet {
 
     private static final String UPLOAD_FOLDER = "D:\\PRANAY\\Projects\\LibraryImages\\";

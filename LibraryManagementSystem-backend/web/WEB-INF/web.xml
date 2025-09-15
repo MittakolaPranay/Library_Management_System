@@ -18,7 +18,7 @@
         <url-pattern>/check</url-pattern>
     </servlet-mapping>
 
-
+<!--LoginServlet-->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>servlets.LoginServlet</servlet-class>
@@ -29,6 +29,7 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+<!--    registerServlet-->
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>servlets.RegisterServlet</servlet-class>
@@ -39,5 +40,75 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
 
+
+<!--    AddBookServlet-->
+    <servlet>
+        <servlet-name>AddBookServlet</servlet-name>
+        <servlet-class>servlets.AddBookServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddBookServlet</servlet-name>
+        <url-pattern>/addBook</url-pattern>
+    </servlet-mapping>
+
+
+<!--    DeleteBookServlet-->
+    <servlet>
+        <servlet-name>DeleteBookServlet</servlet-name>
+        <servlet-class>servlets.DeleteBookServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteBookServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
+
+<!--    GetAllBooksServlet-->
+    <servlet>
+        <servlet-name>GetAllBooksServlet</servlet-name>
+        <servlet-class>servlets.GetAllBooksServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetAllBooksServlet</servlet-name>
+        <url-pattern>/getBooks</url-pattern>
+    </servlet-mapping>
+
+
+<!--    SearchBooksServlet-->
+    <servlet>
+        <servlet-name>SearchBooksServlet</servlet-name>
+        <servlet-class>servlets.SearchBooksServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SearchBooksServlet</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+
+<!--    UpdateBookServlet-->
+    <servlet>
+        <servlet-name>UpdateBookServlet</servlet-name>
+        <servlet-class>servlets.UpdateBookServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateBookServlet</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+
+<!--SessionManagementServlet-->
+
+    <servlet>
+        <servlet-name>SessionManagementServlet</servlet-name>
+        <servlet-class>servlets.SessionManagementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SessionManagementServlet</servlet-name>
+        <url-pattern>/getSession</url-pattern>
+    </servlet-mapping>
 
 </web-app>

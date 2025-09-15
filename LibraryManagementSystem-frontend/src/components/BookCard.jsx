@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import "./BookCard.css";
 
 function BookCard({ book }) {
@@ -6,7 +6,7 @@ function BookCard({ book }) {
   return (
     <div className="card" >
       <div className="card-image">
-        <img src={book.image_url} alt={book.title} />
+        <img src={"http://localhost:8080"+book.image_url} alt={book.title} />
       </div>
       <button className="borrow"><i class="fa-solid fa-download"></i></button>
       <div className="card-box">

@@ -4,23 +4,19 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import models.Book;
-import models.BookDAO;
-import org.json.JSONArray;
+import jakarta.servlet.http.HttpSession;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
-public class SearchBooksServlet extends HttpServlet {
+public class SessionManagementServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         res.setContentType("application/json");
         PrintWriter writer = res.getWriter();
-        JSONArray booksArray = new JSONArray();
         JSONObject responseObject = new JSONObject();
 
 
@@ -31,35 +27,29 @@ public class SearchBooksServlet extends HttpServlet {
 
         try {
 
-            String q = req.getParameter("q");
-            System.out.println("params from front end -------"+ q);
-            BookDAO bookDAO = new BookDAO();
-            List<Book> books = bookDAO.searchBooks(q);
+            HttpSession session = req.getSession(false);
 
-            if(books.isEmpty()) {
-                responseObject.put("status",false);
-                responseObject.put("message","Couldn't found book..");
-            }else {
-                for(Book book : books) {
-                    JSONObject bookObject = new JSONObject();
-                    bookObject.put("id",book.getId());
-                    bookObject.put("title",book.getTitle());
-                    bookObject.put("author",book.getAuthor());
-                    bookObject.put("isbn",book.getIsbn());
-                    bookObject.put("copies",book.getCopies());
-                    bookObject.put("available",book.getAvailable());
-                    bookObject.put("image_url",book.getImageURL());
 
-                    booksArray.put(bookObject);
-                }
-
+            if(session != null &&
+                    session.getAttribute("userID") != null &&
+                    session.getAttribute("userName") != null &&
+                    session.getAttribute("userEmail") != null &&
+                    session.getAttribute("userRole") != null
+            ) {
                 responseObject.put("status",true);
-                responseObject.put("books",booksArray);
-            }
+                responseObject.put("userID",session.getAttribute("userID"));
+                responseObject.put("userEmail",session.getAttribute("userEmail"));
+                responseObject.put("userName",session.getAttribute("userName"));
+                responseObject.put("userRole",session.getAttribute("userRole"));
 
+            } else {
+                responseObject.put("status",false);
+                responseObject.put("message","Your session has expired. Please log in again to continue.");
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
+
         writer.print(responseObject.toString());
         writer.flush();
     }
@@ -72,3 +62,6 @@ public class SearchBooksServlet extends HttpServlet {
         res.setHeader("Access-Control-Allow-Credentials","true");
     }
 }
+
+
+

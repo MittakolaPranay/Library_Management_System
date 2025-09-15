@@ -1,17 +1,20 @@
 
+import { use, useState } from "react";
 import BookList from "./BookList";
 import Nav from "./Nav";
 
 function BooksDashboard() {
 
-    let searchInput;
+    let [searchInput, setSearchInput] = useState("");
     
-    function setSearchInput (input) {
-        searchInput = input;
+    function setInput (input) {
+        console.log(input)
+        setSearchInput(input);
     }
+
     return <section>
-        <Nav setInput={setSearchInput}/>
-        <BookList />
+        <Nav setInput={setInput}/>
+        <BookList searchInput={searchInput}/>
     </section>
 }
 
