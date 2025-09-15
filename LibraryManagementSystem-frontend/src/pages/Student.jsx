@@ -1,9 +1,22 @@
-import AddBookForm from "../components/AddBookForm";
+import { useEffect, useState } from "react";
 import BooksDashboard from "../components/BooksDashboard";
+import getSession from "../services/GetSession";
 
-function Student () {
+function Student() {
+
+
+    let [userID,setUserID] = useState(0);
+
+    useEffect(() => {
+        async function setSession() {
+            let session = await getSession();
+            setUserID(session.userID)
+        }
+        setSession();
+    }, []);
+
     return <section>
-        <BooksDashboard />
+        <BooksDashboard id={userID} />
     </section>
 }
 

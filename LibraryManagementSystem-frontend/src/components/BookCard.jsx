@@ -1,14 +1,19 @@
 
 import "./BookCard.css";
 
-function BookCard({ book }) {
+function BookCard({ book ,userId, bookId}) {
+
+  let handleBtn = () => {
+    console.log(userId);
+    console.log(bookId)
+  }
 
   return (
     <div className="card" >
       <div className="card-image">
         <img src={"http://localhost:8080"+book.image_url} alt={book.title} />
       </div>
-      <button className="borrow"><i class="fa-solid fa-download"></i></button>
+      <button className="borrow" onClick={handleBtn}><i class="fa-solid fa-download"></i></button>
       <div className="card-box">
         <h3 className="card-title">{book.title}</h3>
         <p className="card-author">{book.author}</p>

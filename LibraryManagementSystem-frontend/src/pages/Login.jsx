@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./Login.css";
 import { useState } from "react";
 import loginUser from "../services/loginServices";
-
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 
@@ -15,6 +15,8 @@ function Login() {
         email : false,
         password : false,
     }) ;
+
+    let navigate = useNavigate();
 
     let [hidePassword,setHidePassword] = useState(true);
 
@@ -51,9 +53,12 @@ function Login() {
 
         const response = await loginUser(loginInput);
 
-        if(response.true){
+        if(response.status){
             console.log("login successfull")
             console.log(response);
+            if(response.role == "student") {
+                navigate("/student");
+            } 
         }
 
     }

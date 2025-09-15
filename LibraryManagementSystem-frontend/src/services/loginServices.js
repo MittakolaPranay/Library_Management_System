@@ -7,16 +7,17 @@ async function loginUser(userData) {
     try {
         let req = await fetch(`http://localhost:8080/backend/login`, {
             method: "POST",
+            body : data,
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
             credentials: "include" // important for session cookies
         });
 
-        let response = await req.json();
-        console.log(response);
+        let res = await req.json();
+        console.log(res);
 
-        return response;
+        return res;
 
     } catch (error) {
         console.error("Error registering user:", error);

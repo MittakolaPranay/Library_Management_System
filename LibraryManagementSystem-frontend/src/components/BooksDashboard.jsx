@@ -1,9 +1,9 @@
 
-import { use, useState } from "react";
+import { useState } from "react";
 import BookList from "./BookList";
 import Nav from "./Nav";
 
-function BooksDashboard() {
+function BooksDashboard({id}) {
 
     let [searchInput, setSearchInput] = useState("");
     
@@ -14,7 +14,7 @@ function BooksDashboard() {
 
     return <section>
         <Nav setInput={setInput}/>
-        <BookList searchInput={searchInput}/>
+        <BookList searchInput={searchInput} id={id}/>
     </section>
 }
 
