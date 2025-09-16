@@ -54,8 +54,6 @@ function Login() {
         const response = await loginUser(loginInput);
 
         if(response.status){
-            console.log("login successfull")
-            console.log(response);
             if(response.role == "student") {
                 navigate("/student");
             } 

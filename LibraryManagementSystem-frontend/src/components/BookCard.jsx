@@ -1,11 +1,23 @@
 
+import { useSearchParams } from "react-router-dom";
+import borrowBook from "../services/borroBook";
 import "./BookCard.css";
+import { useState } from "react";
 
 function BookCard({ book ,userId, bookId}) {
 
-  let handleBtn = () => {
-    console.log(userId);
-    console.log(bookId)
+
+  let handleBtn = async () => {
+    try {
+      let res = await borrowBook(userId,bookId);
+      if(res.status){
+        alert("book borrowed successfully");
+      } else {
+        alert("failed to borrow book or this book is already borrowed");
+      }
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (

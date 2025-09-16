@@ -7,48 +7,70 @@ import java.time.LocalDate;
 
 public class TransactionDAO {
 
-    public boolean borrowBook(int userId,int bookId) {
-        String checkBookAvailableQuery = "select available from books where id = ?";
-        try (
-                Connection connection = DBConnection.getConnector();
-                PreparedStatement preparedStatement = connection.prepareStatement(checkBookAvailableQuery);
-                ) {
-            preparedStatement.setInt(1,bookId);
-            try (
-                    ResultSet resultSet = preparedStatement.executeQuery();
-                    ) {
-                if(resultSet.next() && resultSet.getInt("available") > 0) {
-                    String insertIntoTransactionsQuery = "insert into transactions (user_id,book_id,issue_date,due_date,return_date) values (?,?,?,?,?)";
-                    try (
-                            PreparedStatement preparedStatement1 = connection.prepareStatement(insertIntoTransactionsQuery);
-                            ) {
-                        Date issueDate = Date.valueOf(LocalDate.now());
-                        Date dueDate = Date.valueOf(LocalDate.now().plusDays(14));
-                        preparedStatement1.setInt(1,userId);
-                        preparedStatement1.setInt(2,bookId);
-                        preparedStatement1.setDate(3,issueDate);
-                        preparedStatement1.setDate(4,dueDate);
-                        preparedStatement1.setNull(5, Types.DATE);
-                        int row = preparedStatement1.executeUpdate();
-                        if(row > 0) {
-                            String decrementAvailableQuery = "update books set available = ? where id = ?";
-                            try (
-                                    PreparedStatement preparedStatement2 = connection.prepareStatement(decrementAvailableQuery)
-                                    ) {
-                                preparedStatement2.setInt(1,resultSet.getInt("available") - 1);
-                                preparedStatement2.setInt(2,bookId);
-                                preparedStatement2.executeUpdate();
+    public boolean borrowBook(int userId, int bookId) {
+        System.out.println("user id and book id at borrow book function :" + userId + " and " + bookId);
+
+        String checkAlreadyIssuedQuery =
+                "SELECT COUNT(*) FROM transactions WHERE user_id = ? AND book_id = ? AND status = 'issued'";
+
+        try (Connection connection = DBConnection.getConnector()) {
+
+           
+            try (PreparedStatement psCheck = connection.prepareStatement(checkAlreadyIssuedQuery)) {
+                psCheck.setInt(1, userId);
+                psCheck.setInt(2, bookId);
+                try (ResultSet rs = psCheck.executeQuery()) {
+                    if (rs.next() && rs.getInt(1) > 0) {
+                        // Already borrowed, block it
+                        System.out.println("User already has this book issued.");
+                        return false;
+                    }
+                }
+            }
+
+
+            String checkBookAvailableQuery = "SELECT available FROM books WHERE id = ?";
+            try (PreparedStatement psBook = connection.prepareStatement(checkBookAvailableQuery)) {
+                psBook.setInt(1, bookId);
+                try (ResultSet resultSet = psBook.executeQuery()) {
+                    if (resultSet.next() && resultSet.getInt("available") > 0) {
+
+
+                        String insertIntoTransactionsQuery =
+                                "INSERT INTO transactions (user_id, book_id, issue_date, due_date, return_date, status) VALUES (?,?,?,?,?,?)";
+                        try (PreparedStatement psInsert = connection.prepareStatement(insertIntoTransactionsQuery)) {
+                            Date issueDate = Date.valueOf(LocalDate.now());
+                            Date dueDate = Date.valueOf(LocalDate.now().plusDays(14));
+
+                            psInsert.setInt(1, userId);
+                            psInsert.setInt(2, bookId);
+                            psInsert.setDate(3, issueDate);
+                            psInsert.setDate(4, dueDate);
+                            psInsert.setNull(5, Types.DATE); // return_date is null initially
+                            psInsert.setString(6, "issued"); // explicitly set status
+
+                            int row = psInsert.executeUpdate();
+                            if (row > 0) {
+
+                                String decrementAvailableQuery = "UPDATE books SET available = ? WHERE id = ?";
+                                try (PreparedStatement psUpdate = connection.prepareStatement(decrementAvailableQuery)) {
+                                    psUpdate.setInt(1, resultSet.getInt("available") - 1);
+                                    psUpdate.setInt(2, bookId);
+                                    psUpdate.executeUpdate();
+                                }
+                                return true;
                             }
-                            return true;
                         }
                     }
                 }
             }
+
         } catch (SQLException exception) {
-            System.err.print("SQL Error : "+exception.getMessage());
+            System.err.print("SQL Error: " + exception.getMessage());
         }
         return false;
     }
+
 
     public boolean returnBook(int userId,int bookId) {
 

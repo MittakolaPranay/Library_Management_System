@@ -36,6 +36,7 @@ function Nav({setInput}) {
             <div className="menu">
                 <ul className={showMenu ? "showmenu" : "hidemenu"}>
                     <li><Link to={"#"}>Profile</Link></li>
+                    <li><Link to={"#"}>My Borrowed books</Link></li>
                     <li><Link to={"#"}>Log out</Link></li>
                 </ul>
             </div>

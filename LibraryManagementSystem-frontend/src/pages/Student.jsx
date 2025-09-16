@@ -5,18 +5,27 @@ import getSession from "../services/GetSession";
 function Student() {
 
 
-    let [userID,setUserID] = useState(0);
+    let [state, setState] = useState({});
 
     useEffect(() => {
         async function setSession() {
-            let session = await getSession();
-            setUserID(session.userID)
+            let req = await getSession();
+            setState(() => {
+                return req;
+            });
         }
         setSession();
     }, []);
 
-    return <section>
-        <BooksDashboard id={userID} />
+    return <section style={{display : "flex" , justifyContent : "center", alignItems : "center", paddingTop : "30px"}}>
+        {
+            state.status ? 
+            <BooksDashboard id={state.userID} /> :
+            <div>
+                <p>{state.message}</p>
+                <button>Login</button>
+            </div>
+        }
     </section>
 }
 
