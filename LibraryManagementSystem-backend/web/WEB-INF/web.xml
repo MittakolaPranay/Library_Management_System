@@ -111,4 +111,29 @@
         <url-pattern>/getSession</url-pattern>
     </servlet-mapping>
 
+
+<!--BorrowBookServlet-->
+    <servlet>
+        <servlet-name>BorrowBookServlet</servlet-name>
+        <servlet-class>servlets.BorrowBookServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>BorrowBookServlet</servlet-name>
+        <url-pattern>/borrowBook</url-pattern>
+    </servlet-mapping>
+
+
+<!--    ReturnBookServlet-->
+
+    <servlet>
+        <servlet-name>ReturnBookServlet</servlet-name>
+        <servlet-class>servlets.ReturnBookServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReturnBookServlet</servlet-name>
+        <url-pattern>/returnBook</url-pattern>
+    </servlet-mapping>
+
 </web-app>
