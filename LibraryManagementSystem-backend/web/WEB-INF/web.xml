@@ -136,4 +136,16 @@
         <url-pattern>/returnBook</url-pattern>
     </servlet-mapping>
 
+<!--    GetBorrowedBookServlet-->
+
+    <servlet>
+        <servlet-name>GetBorrowedBookServlet</servlet-name>
+        <servlet-class>servlets.GetBorrowedBookServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetBorrowedBookServlet</servlet-name>
+        <url-pattern>/getBorrowedBook</url-pattern>
+    </servlet-mapping>
+
 </web-app>

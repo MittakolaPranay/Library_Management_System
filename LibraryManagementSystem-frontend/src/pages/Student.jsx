@@ -17,7 +17,7 @@ function Student() {
         setSession();
     }, []);
 
-    return <section style={{display : "flex" , justifyContent : "center", alignItems : "center", paddingTop : "30px"}}>
+    return <section >
         {
             state.status ? 
             <BooksDashboard id={state.userID} /> :

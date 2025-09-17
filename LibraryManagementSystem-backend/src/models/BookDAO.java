@@ -141,25 +141,65 @@ public class BookDAO {
         return false;
     }
 
-    public boolean DeleteBook(int id) {
 
-        String deleteBookQuery = "delete from books where id = ?";
+    public List<Book> getBorrowedBooks(int userId) {
+        List<Book> books = new ArrayList<>();
+        String query = "SELECT b.* FROM books b " +
+                "INNER JOIN transactions t ON b.id = t.book_id " +
+                "WHERE t.user_id = ? AND t.status = 'issued'";
+
         try (
                 Connection connection = DBConnection.getConnector();
-                PreparedStatement preparedStatement = connection.prepareStatement(deleteBookQuery);
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ) {
+            preparedStatement.setInt(1, userId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    books.add(new Book(
+                            resultSet.getInt("id"),
+                            resultSet.getString("title"),
+                            resultSet.getString("author"),
+                            resultSet.getString("isbn"),
+                            resultSet.getInt("copies"),
+                            resultSet.getInt("available"),
+                            resultSet.getString("image_url")
+                    ));
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return books;
+    }
+    public boolean DeleteBook(int id) {
+        String checkIssueQuery = "select count(*) as cnt from transactions where book_id = ? and status = 'issued'";
+        String deleteBookQuery = "delete from books where id = ?";
+
+        try (
+                Connection connection = DBConnection.getConnector();
+                PreparedStatement preparedStatement = connection.prepareStatement(checkIssueQuery);
                 ) {
             preparedStatement.setInt(1,id);
-
-            int row = preparedStatement.executeUpdate();
-
-            if(row >= 1) {
-                return true;
+            try (
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    ) {
+                if(resultSet.next() && resultSet.getInt("cnt") > 0){
+                    return false;
+                }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
+            try (
+                    PreparedStatement preparedStatement1 = connection.prepareStatement(deleteBookQuery);
+                    ) {
+                preparedStatement1.setInt(1,id);
+                int affected = preparedStatement1.executeUpdate();
+
+                return affected > 0;
+            }
+        } catch (SQLException exception) {
+            System.err.print("SQL error :"+exception.getMessage());
+        }
         return false;
     }
-
 }
+

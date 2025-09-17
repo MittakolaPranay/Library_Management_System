@@ -74,7 +74,7 @@ public class TransactionDAO {
 
     public boolean returnBook(int userId,int bookId) {
 
-        String returnBookQuery = "update transactions set return_date = ?, status = ? where user_id = ? and book_id = ? and stats = 'issued'";
+        String returnBookQuery = "update transactions set return_date = ?, status = ? where user_id = ? and book_id = ? and status = 'issued'";
         try (
                 Connection connection = DBConnection.getConnector();
                 PreparedStatement preparedStatement = connection.prepareStatement(returnBookQuery);

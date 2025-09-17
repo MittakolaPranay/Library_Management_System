@@ -1,0 +1,50 @@
+.borrowed-book {
+    display: flex;
+    height: 8rem;
+    width: 100%;
+    justify-content: space-between;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+}
+
+.borrowed-book .book {
+    display: flex;
+    gap: 1rem;
+}
+
+.book-image {
+    height: 100%;
+}
+
+.book-image img {
+    height: 100%;
+}
+
+
+.book-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.return-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.return-form button {
+    background-color: #fff;
+    color: red;
+    transition: 0.3s ease-out;
+    border: red 1px solid;
+}
+
+.return-form button:hover {
+    background-color: red;
+    color: #fff;
+    border: #fff 1px solid;
+}
