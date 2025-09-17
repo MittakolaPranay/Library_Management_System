@@ -66,6 +66,21 @@ public class UpdateBookServlet extends HttpServlet {
 
             String imageUrl = "/LibraryImages/"+fileName;
 
+            if(copies < 0) {
+                responseObject.put("status",false);
+                responseObject.put("message","copies must be >= 0");
+            }
+
+            if(available < 0){
+                responseObject.put("status",false);
+                responseObject.put("message","available must be >= 0");
+            }
+
+            if(available > copies) {
+                responseObject.put("status",false);
+                responseObject.put("message","available cannot be greater than copies");
+            }
+
             Book book = new Book(id,title,author,isbn,copies,available,imageUrl);
             BookDAO bookDAO = new BookDAO();
             boolean success = bookDAO.updateBook(book);

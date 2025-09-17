@@ -187,7 +187,6 @@ public class BookDAO {
                     return false;
                 }
             }
-
             try (
                     PreparedStatement preparedStatement1 = connection.prepareStatement(deleteBookQuery);
                     ) {

@@ -35,7 +35,7 @@ public class DeleteBookServlet extends HttpServlet {
                 responseObject.put("message","book successfully deleted");
             } else {
                 responseObject.put("status",false);
-                responseObject.put("message","failed to delete the book");
+                responseObject.put("message","failed to delete the book or this book is borrowed");
             }
         } catch ( Exception e) {
             responseObject.put("status",false);
