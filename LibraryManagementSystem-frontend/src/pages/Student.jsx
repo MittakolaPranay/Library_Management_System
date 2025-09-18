@@ -17,7 +17,7 @@ function Student() {
         setSession();
     }, []);
 
-    return <section >
+    return <section style={{position : "relative"}}>
         {
             state.status ? 
             <BooksDashboard id={state.userID} /> :

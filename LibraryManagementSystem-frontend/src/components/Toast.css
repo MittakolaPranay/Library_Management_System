@@ -1,0 +1,39 @@
+#toast{
+    height: 15%;
+    width: 25%;
+    position: absolute;
+    top: 20px;
+    background-color: rgb(55, 48, 48);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+#toast button{
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(187, 89, 62);
+}
+
+@media (max-width : 1000px) {
+    #toast{
+        width: 30%;
+    }
+}
+
+@media (max-width : 700px) {
+    #toast{
+        width: 35%;
+    }
+}
+
+
+@media (max-width : 400px) {
+   #toast{
+        width: 70%;
+    }
+}

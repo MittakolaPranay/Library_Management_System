@@ -29,22 +29,9 @@
     align-items: center;
 }
 
-.return-form{
+.form{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-
-.return-form button {
-    background-color: #fff;
-    color: red;
-    transition: 0.3s ease-out;
-    border: red 1px solid;
-}
-
-.return-form button:hover {
-    background-color: red;
-    color: #fff;
-    border: #fff 1px solid;
-}

@@ -3,6 +3,7 @@ import "./Login.css";
 import { useState } from "react";
 import loginUser from "../services/loginServices";
 import { useNavigate } from "react-router-dom";
+import Toast from "../components/Toast";
 
 function Login() {
 
@@ -15,6 +16,8 @@ function Login() {
         email : false,
         password : false,
     }) ;
+
+    let [status,setStatus] = useState(true);
 
     let navigate = useNavigate();
 
@@ -56,17 +59,24 @@ function Login() {
         if(response.status){
             if(response.role == "student") {
                 navigate("/student");
-            } 
+            }  else if(response.role == "librarian") {
+                navigate("/admin");
+            }
+          }  else {
+            setStatus(response.status);
         }
+    }
 
+    let handleToast = () => {
+        setStatus(true);
     }
 
     let showPassword = () => {
         setHidePassword(!hidePassword);
     }
 
-    return <section className="form-section">
-        <form className="form" onSubmit={handleOnSubmit}>
+    return <section className={`form-section`} >
+        <form className={`form ${status ? '':'opacity'}`} onSubmit={handleOnSubmit}>
             <h1>Log in</h1>
             <div className="box">
                 <label htmlFor="email">Email:</label>
@@ -92,6 +102,11 @@ function Login() {
                 <button type="submit">login</button>
             </div>
         </form>
+        {
+            status ? 
+            <></> :
+            <Toast message={"Incorrect password or email"} action={handleToast}/>
+        }
     </section>
 }
 

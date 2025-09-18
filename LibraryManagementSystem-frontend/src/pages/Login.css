@@ -6,6 +6,10 @@
     text-align: end;
 }
 
+.opacity {
+    opacity: 0.5;
+}
+
 .form-section .form {
     margin-top: 10%;
     display: flex;
@@ -50,20 +54,20 @@
 }
 
 @media (max-width : 1000px) {
-    .form-section form{
+    .form-section .form{
         width: 40%;
     }
 }
 
 @media (max-width : 700px) {
-    .form-section form{
+    .form-section .form{
         width: 50%;
     }
 }
 
 
 @media (max-width : 400px) {
-    .box form{
+    .form-section .form{
         width: 80%;
     }
 }

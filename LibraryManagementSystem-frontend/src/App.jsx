@@ -4,7 +4,8 @@ import Login from './pages/login.jsx';
 import Register from "./pages/Register.jsx";
 import { createBrowserRouter ,RouterProvider} from 'react-router-dom';
 import Student from './pages/Student.jsx';
-import MyBorrowedBook from './pages/MyBorroedBooks.jsx';
+import MyBorrowedBook from './pages/MyBorrowedBooks.jsx';
+import Admin from './pages/Admin.jsx';
 function App() {
 
   let route = createBrowserRouter([
@@ -23,6 +24,10 @@ function App() {
     {
       path : "/borrowedbooks",
       element : <MyBorrowedBook />
+    },
+    {
+      path : "/admin",
+      element : <Admin />
     }
   ])
   return <RouterProvider router={route}/>
