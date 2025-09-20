@@ -51,6 +51,7 @@ public class AddBookServlet extends HttpServlet {
                 responseObject.put("status", "error");
                 responseObject.put("message", "All fields are required");
                 writer.print(responseObject.toString());
+                writer.flush();
                 return;
             }
 
@@ -69,16 +70,25 @@ public class AddBookServlet extends HttpServlet {
             if(copies < 0) {
                 responseObject.put("status",false);
                 responseObject.put("message","copies must be >= 0");
+                writer.print(responseObject.toString());
+                writer.flush();
+                return;
             }
 
             if(available < 0){
                 responseObject.put("status",false);
                 responseObject.put("message","available must be >= 0");
+                writer.print(responseObject.toString());
+                writer.flush();
+                return;
             }
 
             if(available > copies) {
                 responseObject.put("status",false);
                 responseObject.put("message","available cannot be greater than copies");
+                writer.print(responseObject.toString());
+                writer.flush();
+                return;
             }
 
             Book book = new Book(title,author,isbn,copies,available,imageURL);

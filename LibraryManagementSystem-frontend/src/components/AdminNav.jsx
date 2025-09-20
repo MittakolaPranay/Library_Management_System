@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./Nav.css";
 import { useState } from "react";
 
-function Nav({setInput}) {
+function AdminNav({setInput}) {
 
     let [showMenu, setShowMenu] = useState(false);
 
@@ -18,6 +18,7 @@ function Nav({setInput}) {
         e.preventDefault();
         setInput(searchInput);
     }
+
     return (
         <>
             <nav className="navbar">
@@ -36,9 +37,7 @@ function Nav({setInput}) {
             <div className="menu">
                 <ul className={showMenu ? "showmenu" : "hidemenu"}>
                     <li><Link to={"#"}>Profile</Link></li>
-                    <li><Link to={"/borrowedbooks"}>My Borrowed books</Link></li>
                     <li><Link to={"/login"}>Log out</Link></li>
-                    <li><Link to={"/student"}>Home</Link></li>
                 </ul>
             </div>
 
@@ -46,7 +45,4 @@ function Nav({setInput}) {
     );
 }
 
-export default Nav;
-
-
-
+export default AdminNav;

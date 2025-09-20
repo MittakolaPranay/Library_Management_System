@@ -3,15 +3,15 @@ import returnBook from "../services/ReturnBook";
 import "./BorrowedBookCard.css"
 
 
-function BorrowedBookCard({ book, userId }) {
+function BorrowedBookCard({ book, userId ,response}) {
 
     let handleSubmit = async (event) => {
         event.preventDefault();
         let request = await returnBook(userId, book.id);
         if (request) {
-            alert("book returned");
+            response("book returned successfully");
         } else {
-            alert("failed to return book");
+            response("failed to return book or alreday returned");
         }
     }
 

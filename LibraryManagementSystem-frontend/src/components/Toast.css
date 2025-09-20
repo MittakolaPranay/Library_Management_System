@@ -1,39 +1,48 @@
-#toast{
-    height: 15%;
-    width: 25%;
-    position: absolute;
-    top: 20px;
+
+
+#toast {
+    height: auto;
+    min-width: 250px;
+    max-width: 400px;
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);  /* centers it horizontally */
     background-color: rgb(55, 48, 48);
     border-radius: 10px;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #fff;
+    z-index: 1000;
+    animation: slideDown 0.3s ease-out forwards;
 }
 
-#toast button{
+/* Button styling */
+#toast button {
+    margin-top: 0.5rem;
     padding: 5px 15px;
     border: none;
     border-radius: 5px;
     background-color: rgb(187, 89, 62);
+    color: #fff;
+    cursor: pointer;
 }
 
-@media (max-width : 1000px) {
-    #toast{
-        width: 30%;
+#toast button:hover {
+    background-color: rgb(150, 70, 50);
+}
+
+/* Slide down animation */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -20px);
     }
-}
-
-@media (max-width : 700px) {
-    #toast{
-        width: 35%;
-    }
-}
-
-
-@media (max-width : 400px) {
-   #toast{
-        width: 70%;
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
     }
 }

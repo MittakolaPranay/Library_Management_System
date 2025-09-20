@@ -6,6 +6,7 @@ import { createBrowserRouter ,RouterProvider} from 'react-router-dom';
 import Student from './pages/Student.jsx';
 import MyBorrowedBook from './pages/MyBorrowedBooks.jsx';
 import Admin from './pages/Admin.jsx';
+import EditBook from './pages/EditBook.jsx';
 function App() {
 
   let route = createBrowserRouter([
@@ -28,6 +29,10 @@ function App() {
     {
       path : "/admin",
       element : <Admin />
+    },
+    {
+      path : "editBook",
+      element : <EditBook />
     }
   ])
   return <RouterProvider router={route}/>

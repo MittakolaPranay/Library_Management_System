@@ -6,7 +6,7 @@ import getAllbooks from "../services/GetAllBooks";
 import getSearchedBooks from "../services/GetSearchedBooks";
 
 
-function BookList({ searchInput ,id}) {
+function BookList({ searchInput ,id,response}) {
 
     let [searchTerm, setSearchTerm] = useState("")
     let [bookArray, setBookArray] = useState([]);
@@ -63,7 +63,7 @@ function BookList({ searchInput ,id}) {
      
      isEmpty ? <h1>book not found</h1> :
               bookArray.map((book) => {
-                    return <li key={book.id}><BookCard book={book} userId={id} bookId={book.id} /></li>
+                    return <li key={book.id}><BookCard book={book} userId={id} bookId={book.id} response={response}/></li>
                 })
         }
     </ul>

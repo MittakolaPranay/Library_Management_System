@@ -2,8 +2,9 @@ import AdminBookCard from "./AdminBookCard";
 import { useEffect,useState } from "react";
 import getAllbooks from "../services/GetAllBooks";
 import getSearchedBooks from "../services/GetSearchedBooks";
+import "./AdminBookList.css"
 
-function AdminBookList({searchInput}) {
+function AdminBookList({searchInput,setToast}) {
     let [searchTerm, setSearchTerm] = useState("")
     let [bookArray, setBookArray] = useState([]);
     let [isEmpty, setIsEmpty] = useState(false);
@@ -54,12 +55,12 @@ function AdminBookList({searchInput}) {
     }, [searchTerm]);
 
 
-    return <ul className="booklist">
+    return <ul className="book-list">
         {
 
             isEmpty ? <h1>book not found</h1> :
                 bookArray.map((book) => {
-                    return <li key={book.id}><AdminBookCard book={book}/></li>
+                    return <li key={book.id}><AdminBookCard book={book} setToast={setToast}/></li>
                 })
         }
     </ul>

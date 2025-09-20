@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import BooksDashboard from "../components/BooksDashboard";
 import getSession from "../services/GetSession";
+import { NavLink } from "react-router-dom";
 
 function Student() {
 
@@ -19,12 +20,9 @@ function Student() {
 
     return <section style={{position : "relative"}}>
         {
-            state.status ? 
+            state.status && state.userRole == "student"? 
             <BooksDashboard id={state.userID} /> :
-            <div>
-                <p>{state.message}</p>
-                <button>Login</button>
-            </div>
+            <p>Your session has expired. Please <NavLink to={"/login"}>log in</NavLink> again.</p>
         }
     </section>
 }

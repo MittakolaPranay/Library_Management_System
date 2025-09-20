@@ -28,6 +28,10 @@ public class Book {
         this.imageURL = imageURL;
     }
 
+    public Book(){
+
+    }
+
     public int getId() {
         return id;
     }

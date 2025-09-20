@@ -13,12 +13,14 @@ h1,h2,h3,h4,h5,h6 {
 
 button {
   font-family: "Junge", cursive;
-  font-weight: 700;
   font-style: normal;
   padding: 0.5rem 1rem;
   font-size: 1.2rem;
-  border-radius: 10px;
+  border-radius: 5px;
+  border: blue solid 1px;
+  color: blue;
 }
+
 
 input {
   padding: 0.5rem;

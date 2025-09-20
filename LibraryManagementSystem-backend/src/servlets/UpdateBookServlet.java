@@ -47,24 +47,31 @@ public class UpdateBookServlet extends HttpServlet {
             int available = Integer.parseInt(stringAvailable);
             Part image = req.getPart("image");
 
-            if(title == null || author == null || isbn == null || copies <= 0 || available <= 0 || image == null) {
+            System.out.println("fields : "+id+" "+title+" "+author+" "+copies+" "+available+" "+"isbn :"+isbn);
+
+            if(title == null || author == null || isbn == null || copies <= 0 || available <= 0 ) {
                 responseObject.put("status", "error");
                 responseObject.put("message", "All fields are required");
                 writer.print(responseObject.toString());
                 return;
             }
 
-            String fileName = image.getSubmittedFileName();
-            InputStream fileContent = image.getInputStream();
+            String imageUrl = null;
 
-                    File upload = new File(UPLOAD_FOLDER);
-            if(!upload.exists()) upload.mkdirs();
+           if(image != null && image.getSize() > 0) {
+               String fileName = image.getSubmittedFileName();
+               InputStream fileContent = image.getInputStream();
 
-            File file = new File(upload,fileName);
+               File upload = new File(UPLOAD_FOLDER);
+               if(!upload.exists()) upload.mkdirs();
 
-            Files.copy(fileContent,file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+               File file = new File(upload,fileName);
 
-            String imageUrl = "/LibraryImages/"+fileName;
+               Files.copy(fileContent,file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+               imageUrl = "/LibraryImages/"+fileName;
+           }else {
+               imageUrl = req.getParameter("image_url");
+           }
 
             if(copies < 0) {
                 responseObject.put("status",false);

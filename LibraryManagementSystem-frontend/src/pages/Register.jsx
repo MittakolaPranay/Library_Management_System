@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import registerUser from "../services/userServices";
+import Toast from "../components/Toast";
 
 function Register() {
 
@@ -23,6 +24,10 @@ function Register() {
     let [hidePassword, setHidePassword] = useState(true);
 
     let [hideConfirmPassword, setHideConfirmPasswor] = useState(true);
+
+    let [status,setStatus] = useState(true);
+
+    let [message,setMessage] = useState("");
 
     let Navigate = useNavigate();
 
@@ -79,13 +84,14 @@ function Register() {
         if(response.status) {
             Navigate("/login");
         }else {
-            alert(response.message);
+            setStatus(false);
+            setMessage(response.message);
         }
     }
 
 
     return <section className="form-section">
-        <form className="form" onSubmit={handleOnSubmit}>
+        <form className={`form ${status ? "" : "opacity"}`} onSubmit={handleOnSubmit}>
             <h1>Create Account</h1>
             <div className="box">
                 <label htmlFor="name">Full name:</label>
@@ -128,6 +134,10 @@ function Register() {
                 <button type="submit">Create account</button>
             </div>
         </form>
+        {
+            status ? <></> :
+            <Toast message={message} action={() => setStatus(true)}/>
+        }
     </section>
 }
 

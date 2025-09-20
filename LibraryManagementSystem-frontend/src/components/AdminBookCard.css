@@ -1,6 +1,5 @@
 .borrowed-book {
     display: flex;
-    height: 8rem;
     width: 100%;
     justify-content: space-between;
     background-color: #fff;
@@ -19,19 +18,52 @@
 
 .book-image img {
     height: 100%;
+    width: 100px;
 }
 
 
 .book-info {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: start;
+    align-items: start;
 }
 
-.form{
+.btn {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap: 1rem;
 }
+
+#delete-btn,#edit-btn{
+    padding: 0.3rem 1rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.5s ease-out;
+}
+
+#delete-btn{
+    border: red 1px solid;
+    color: red;
+}
+
+#edit-btn{
+    border: blue 1px solid;
+    color: blue;
+}
+
+#edit-btn:hover{
+    background-color: blue;
+    color: #fff;
+}
+
+
+
+
+
+
+
 
