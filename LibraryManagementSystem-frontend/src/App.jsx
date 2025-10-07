@@ -7,6 +7,7 @@ import Student from './pages/Student.jsx';
 import MyBorrowedBook from './pages/MyBorrowedBooks.jsx';
 import Admin from './pages/Admin.jsx';
 import EditBook from './pages/EditBook.jsx';
+import AddBook from './pages/AddBook.jsx';
 function App() {
 
   let route = createBrowserRouter([
@@ -33,6 +34,10 @@ function App() {
     {
       path : "editBook",
       element : <EditBook />
+    },
+    {
+      path : "/addBook",
+      element : <AddBook />
     }
   ])
   return <RouterProvider router={route}/>

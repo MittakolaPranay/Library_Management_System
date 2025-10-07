@@ -38,6 +38,7 @@ function AdminNav({setInput}) {
                 <ul className={showMenu ? "showmenu" : "hidemenu"}>
                     <li><Link to={"#"}>Profile</Link></li>
                     <li><Link to={"/login"}>Log out</Link></li>
+                    <li><Link to={"/addBook"}>Add book</Link></li>
                 </ul>
             </div>
 

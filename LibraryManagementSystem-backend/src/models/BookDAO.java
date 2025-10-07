@@ -61,7 +61,7 @@ public class BookDAO {
 
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            return books;
         }
 
         return books;
@@ -70,11 +70,9 @@ public class BookDAO {
 
     public List<Book> searchBooks(String q) {
 
-        System.out.println("---------- q is" + q);
         String searchBooksQuery = "select * from books where title like ? or author like ? or isbn like ?";
         List<Book> books = new ArrayList<>();
         String searchPattern = "%" + q + "%";
-        System.out.println("----- final pattern :"+searchPattern);
         try (
                 Connection connection = DBConnection.getConnector();
                 PreparedStatement preparedStatement = connection.prepareStatement(searchBooksQuery);
@@ -96,14 +94,6 @@ public class BookDAO {
                         rs.getInt("available"),
                         rs.getString("image_url")
                 ));
-            }
-
-            if(!books.isEmpty()) {
-                for(Book book: books) {
-                    System.out.println("----------"+book.getTitle());
-                }
-            } else {
-                System.out.println("--------------------book is empty-----------------------");
             }
 
             rs.close();
@@ -135,7 +125,7 @@ public class BookDAO {
                 return true;
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return false;
         }
 
         return false;
@@ -167,7 +157,7 @@ public class BookDAO {
                 }
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return books;
         }
         return books;
     }
@@ -196,9 +186,8 @@ public class BookDAO {
                 return affected > 0;
             }
         } catch (SQLException exception) {
-            System.err.print("SQL error :"+exception.getMessage());
+            return false;
         }
-        return false;
     }
 }
 

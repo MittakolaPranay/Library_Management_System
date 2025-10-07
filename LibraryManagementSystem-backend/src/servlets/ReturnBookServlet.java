@@ -39,7 +39,6 @@ public class ReturnBookServlet extends HttpServlet {
             }
         } catch (Exception exception) {
             responseObject.put("status",false);
-            System.err.print("Server error :"+exception.getMessage());
         }
 
         writer.print(responseObject.toString());

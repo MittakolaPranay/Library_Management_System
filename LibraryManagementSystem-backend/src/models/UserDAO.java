@@ -26,9 +26,8 @@ public class UserDAO {
 
             return row > 0;
         } catch (SQLException e) {
-            System.err.print("Error while registering the user :"+e.getMessage());
+            return false;
         }
-        return false;
     }
 
 
@@ -56,7 +55,7 @@ public class UserDAO {
                 }
             }
         } catch (SQLException e) {
-            System.err.print("Error while login by user :"+ e.getMessage());
+            return null;
         }
         return null;
     }

@@ -31,8 +31,6 @@ public class BorrowBookServlet extends HttpServlet {
             String stringBookId = req.getParameter("bookId");
             int bookId = Integer.parseInt(stringBookId);
 
-            System.out.println(userId +" " + bookId);
-
             TransactionDAO transactionDAO = new TransactionDAO();
             boolean success = transactionDAO.borrowBook(userId,bookId);
 
@@ -43,7 +41,6 @@ public class BorrowBookServlet extends HttpServlet {
             }
         } catch (Exception e) {
             responseObject.put("status",false);
-            System.err.print("Error" + e.getMessage());
         }
 
         writer.print(responseObject.toString());

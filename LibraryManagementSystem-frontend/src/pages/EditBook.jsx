@@ -22,7 +22,7 @@ function EditBook() {
 
     let location = useLocation();
     const { book } = location.state || {};
-    return   state.status ? <UpdateBook book={book} /> :
+    return   state.status && state.userRole == "librarian" ? <UpdateBook book={book} /> :
              <p>Your session has expired. Please <NavLink to={"/login"}>log in</NavLink> again.</p>
     
 }

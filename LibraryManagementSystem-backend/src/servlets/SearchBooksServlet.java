@@ -32,7 +32,6 @@ public class SearchBooksServlet extends HttpServlet {
         try {
 
             String q = req.getParameter("q");
-            System.out.println("params from front end -------"+ q);
             BookDAO bookDAO = new BookDAO();
             List<Book> books = bookDAO.searchBooks(q);
 
@@ -58,7 +57,8 @@ public class SearchBooksServlet extends HttpServlet {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            responseObject.put("status",false);
+            responseObject.put("message","server error : "+e.getMessage());
         }
         writer.print(responseObject.toString());
         writer.flush();

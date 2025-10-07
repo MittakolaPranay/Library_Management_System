@@ -39,7 +39,7 @@ public class DeleteBookServlet extends HttpServlet {
             }
         } catch ( Exception e) {
             responseObject.put("status",false);
-            responseObject.put("message","server error");
+            responseObject.put("message","server error, try after some time");
             e.printStackTrace();
         }
 

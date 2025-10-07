@@ -8,7 +8,6 @@ import java.time.LocalDate;
 public class TransactionDAO {
 
     public boolean borrowBook(int userId, int bookId) {
-        System.out.println("user id and book id at borrow book function :" + userId + " and " + bookId);
 
         String checkAlreadyIssuedQuery =
                 "SELECT COUNT(*) FROM transactions WHERE user_id = ? AND book_id = ? AND status = 'issued'";
@@ -21,13 +20,10 @@ public class TransactionDAO {
                 psCheck.setInt(2, bookId);
                 try (ResultSet rs = psCheck.executeQuery()) {
                     if (rs.next() && rs.getInt(1) > 0) {
-                        // Already borrowed, block it
-                        System.out.println("User already has this book issued.");
                         return false;
                     }
                 }
             }
-
 
             String checkBookAvailableQuery = "SELECT available FROM books WHERE id = ?";
             try (PreparedStatement psBook = connection.prepareStatement(checkBookAvailableQuery)) {
@@ -46,8 +42,8 @@ public class TransactionDAO {
                             psInsert.setInt(2, bookId);
                             psInsert.setDate(3, issueDate);
                             psInsert.setDate(4, dueDate);
-                            psInsert.setNull(5, Types.DATE); // return_date is null initially
-                            psInsert.setString(6, "issued"); // explicitly set status
+                            psInsert.setNull(5, Types.DATE);
+                            psInsert.setString(6, "issued");
 
                             int row = psInsert.executeUpdate();
                             if (row > 0) {
@@ -111,7 +107,7 @@ public class TransactionDAO {
                 }
             }
         } catch (SQLException e) {
-            System.err.print("Database error :"+e.getMessage());
+            return false;
         }
 
         return false;

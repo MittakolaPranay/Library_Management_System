@@ -52,8 +52,7 @@ public class GetBorrowedBookServlet extends HttpServlet {
 
         } catch (Exception exception) {
             responseObject.put("status",false);
-            responseObject.put("message", "Server error");
-            System.err.print("Error : "+exception.getMessage());
+            responseObject.put("message", "Server error, try again after some time");
         }
         writer.print(responseObject.toString());
         writer.flush();
